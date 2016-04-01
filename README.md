@@ -9,40 +9,40 @@ Explain what is happening on each of the following lines in the code.
 
 | Line # | What's happening?
 |:------:|-------------------
-| 1      |
-| 2      |
-| 3      |
-| 6      |
-| 7-8    |
-| 9      |
-| 10     |
-| 11     |
-| 12     |
-| 13     |
-| 14     |
-| 17-19  |
+| 1      | defining a constant as a hash
+| 2      | defining the the first key and it's value/positive words
+| 3      | defining the second key and its value/ negative words
+| 6      | creating a method that takes one parameter
+| 7-8    | defining two local variables, sets their value to 0
+| 9      | converting the parameter to downcase, in case it was given with a capital letter
+| 10     | splitting the parameter at spaces and iterating over each word
+| 11     | checking to see if any of the values of the key happy in the constant are included in the parameter
+| 12     | adds 1 to the current value of the local variable happy
+| 13     | checking to see if any of the values of the key sad in the constant are included in the parameter
+| 14     | adds 1 to the current value of the local variable sad
+| 17-19  | outputting :-) if the local variable happy has a value greater than the local variable sad, outputting :-( if the local variable sad has a value greater than the local variable happy, or outputting :-| if they are equal.
 
 ### Data Types
 What's the Data Type of the following?
 
 | Code                       | Data Type
 |----------------------------|-----------
-| FEELINGS                   |
-| :sad                       |
-| happy                      |
-| words                      |
-| words.split(" ")           |
-| FEELINGS[:sad]             |
-| FEELINGS[:happy].include?  |
-| analyze_mood(text)         |
+| FEELINGS                   | constant
+| :sad                       | key/symbol
+| happy                      | local variable/fixnum
+| words                      | string
+| words.split(" ")           | str method call -> array of strings
+| FEELINGS[:sad]             | array literal/ array of strings
+| FEELINGS[:happy].include?  | boolean
+| analyze_mood(text)         | return type is a string
 
 ### Explaining the Code
 | Question               | Answer
 |------------------------|-------
-| Why do we need line 9? |
-| What is the relationship between `words` and `word` (line 10)? |
-| Why doesn't line 19 have an associated if/condition? |
-| What is the relationship between `text[0]`, `text[1]`, and `words`? |
+| Why do we need line 9? | in case the parameter included an uppercase letter, it would never match the key values in the constant variable hash
+| What is the relationship between `words` and `word` (line 10)? | word is one element in the words array
+| Why doesn't line 19 have an associated if/condition? | Because it is implied that the two would be equal...you've declared that if one is greater than the other, something else will happen, so if one is not greater than the other, it would mean they are equal.
+| What is the relationship between `text[0]`, `text[1]`, and `words`? | in the puts statement, you are calling the method on the first [0] and second [1] elements within the array text, each of these become the parameters (words) given to the method
 
 ### Assignment: Requirements
 1. Replace lines 31 and 32 and write a loop to print out each day and the emoticon that is associated by analyzing the mood of that day.
@@ -54,7 +54,8 @@ Your result will look like:
 ...
 ```
 
-**think**: Why does 03/13 come out as _sad_ when it should be _happy_? How could we fix this?
+**think**: Why does 03/13 come out as _neutral_ when it should be _happy_? How could we fix this?
+   -it's neutral because every value word has a punctuation attached to it, so it's not registering as an actual value comparable to the ones in the hash.
 
 2. To make the results a little more accurate, let's write and utilize a method called `strip_punctuation` to strip out the punctuation that affects the results. Namely, remove  exclamation marks (!), periods (.), commas (,), and hashtags (#).
 
@@ -67,7 +68,7 @@ After writing this method, our new result should be:
 ...
 ```
 
-**think**: Where should we call `strip_punctuation`? Does it matter? Why?
+**think**: Where should we call `strip_punctuation`? Does it matter? Why? probably after we downcase the words, but before we split the words into single elements to analyze.
 
 3. Write a method called `happy_days` to determine how many logged entries it takes until there have been three :-) happy days.
 
